@@ -1,0 +1,17 @@
+# == Schema Information
+#
+# Table name: lists
+#
+#  id         :integer          not null, primary key
+#  occasion   :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  occasion: MyString
+
+two:
+  occasion: MyString
