@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  
+
   def index
     @lists = List.all
   end
@@ -24,5 +24,15 @@ class ListsController < ApplicationController
 
   def edit
     @list = List.find(params[:id])
+  end
+
+  def update
+    @list = List.find(params[:id])
+    if @list.update_attributes(params[:list])
+      flash[:notice] = "Your changes have been saved."
+      redirect_to list_path
+    else
+      render :edit
+    end
   end
 end

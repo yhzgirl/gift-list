@@ -23,4 +23,12 @@ class ListsControllerTest < ActionController::TestCase
     assert_equal list, assigns(:list) # assigns(:list) is what the controller assigns to @list
   end
 
+  test 'an occasion can be updated' do
+    list = ListFactory.list
+    assert_equal "some occasion", list.occasion
+    put :update, {:list => {:occasion => "Graduation"}, :id => list.id }
+    assert_equal list, assigns(:list)
+    assert_equal 'Graduation', assigns(:list).occasion
+  end
+
 end
