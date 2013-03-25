@@ -1,2 +1,10 @@
 <h1>Occasions</h1>
 <p>Here they are!</p>
+
+<ul>
+
+    <% @lists.each do |list| %>
+     <li><%= link_to list.occasion, list_path(list) %> </li><br>
+    <% end %>
+
+<p><%= link_to 'Add a list', new_list_path %></p>

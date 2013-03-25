@@ -11,9 +11,10 @@ class ListsControllerTest < ActionController::TestCase
     get :new
     assert_response :success
     list = List.new(:occasion => "Birthday")
-    puts list.inspect
     post :create
     assert_equal 1, List.count
   end
+
+
 
 end

@@ -8,7 +8,7 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = List.new(params[:ocassion])
+    @list = List.new(params[:list])
     if @list.save
       redirect_to @list
     else
@@ -16,4 +16,8 @@ class ListsController < ApplicationController
     end
   end
 
+  def show
+    @list = List.find(params[:id])
+    raise ActiveRecord::RecordNotFound if @list.nil?
+  end
 end
