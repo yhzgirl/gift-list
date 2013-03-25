@@ -31,4 +31,11 @@ class ListsControllerTest < ActionController::TestCase
     assert_equal 'Graduation', assigns(:list).occasion
   end
 
+  test 'an occasion can be deleted' do
+    list = ListFactory.list
+    assert_equal 1, List.count
+    delete :destroy, { :id => list.id }
+    assert_equal 0, List.count
+  end
+
 end
