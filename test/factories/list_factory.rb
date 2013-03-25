@@ -1,7 +1,8 @@
 class ListFactory
+
   def self.list(params = {})
     params[:occasion] ||= "some occasion"
-    params
+    List.create! params
   end
 
 end

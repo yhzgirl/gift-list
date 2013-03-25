@@ -2,24 +2,25 @@ require 'test_helper'
 require 'factories/list_factory'
 
 class ListsControllerTest < ActionController::TestCase
+
   test "should get index" do
-    get :index
+    get :index # simulates typing localhost:3000/lists
     assert_response :success
     assert_not_nil assigns(:lists)
   end
 
   test "a list of occasions can be created" do
-    get :new
-    assert_response :success
-    list = ListFactory.list
-    post :create
+    assert_equal 0, List.count
+    post :create, {:list => {:occasion => "Birthday"}} # submitting a form to create a new list
     assert_equal 1, List.count
+    assert_equal "Birthday", List.first.occasion
   end
 
-  # test 'an occasion can be updated' do
-  #   get :edit
-  #   assert_response :success
-  #   List.find(params[:id])
-  # end
+  test 'an occasion can be edited' do
+    list = ListFactory.list
+    get :edit, {:id => list.id} # simulates typing localhost:3000/lists/1/edit in the browser
+    assert_response :success
+    assert_equal list, assigns(:list) # assigns(:list) is what the controller assigns to @list
+  end
 
 end
