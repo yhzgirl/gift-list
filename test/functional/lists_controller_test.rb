@@ -10,8 +10,10 @@ class ListsControllerTest < ActionController::TestCase
   test "a list of occasions can be created" do
     get :new
     assert_response :success
+    list = List.new(:occasion => "Birthday")
+    puts list.inspect
     post :create
-    assert_equals 1, @list.count
+    assert_equal 1, List.count
   end
 
 end

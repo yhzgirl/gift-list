@@ -8,12 +8,12 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = List.create
-    # if @boat.save
-    #   redirect_to @boat
-    # else
-    #   render :new
-    # end
+    @list = List.new(params[:ocassion])
+    if @list.save
+      redirect_to @list
+    else
+      render :new
+    end
   end
 
 end
