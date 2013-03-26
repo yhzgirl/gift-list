@@ -30,4 +30,11 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal 0, User.count
   end
 
+  test 'a user can be edited' do
+    user = UserFactory.user
+    get :edit, { :id => user.id }
+    assert_response :success
+    assert_equal user, assigns(:user)
+  end
+
 end
