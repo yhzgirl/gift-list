@@ -37,7 +37,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal user, assigns(:user)
   end
 
-  test 'can a user be updated' do
+  test 'a user can be updated' do
     user = UserFactory.user
     assert_equal "fake@email.com", user.email
     put :update, { :user => { :email => "betterfake@email.com" }, :id => user.id }

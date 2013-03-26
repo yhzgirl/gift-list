@@ -14,4 +14,9 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal user.id, session[:user_id]
   end
 
+  test 'an unauthenticated user cannot create a session' do
+    user = UserFactory.user
+    post :create, { :email => 'notmy@email.com', :password => 'wrongpassword' }
+    refute session[:user_id]
+  end
 end
