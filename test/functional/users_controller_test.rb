@@ -23,6 +23,12 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal 'fake@email.com', User.first.email
   end
 
+  test 'when user is created they are also logged in' do
+    post :create, {:user => {:email => "fake@email.com", 
+    :password => 'password', :password_confirmation => 'password'}}
+    assert_equal User.first.id, session[:user_id]
+  end
+
   test 'can delete user' do
     user = UserFactory.user
     assert_equal 1, User.count
