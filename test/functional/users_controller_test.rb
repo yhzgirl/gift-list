@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'factories/list_factory'
+require 'factories/user_factory'
 
 class UsersControllerTest < ActionController::TestCase
 
@@ -22,4 +22,12 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal 1, User.count
     assert_equal 'fake@email.com', User.first.email
   end
+
+  test 'can delete user' do
+    user = UserFactory.user
+    assert_equal 1, User.count
+    delete :destroy, { :id => user.id }
+    assert_equal 0, User.count
+  end
+
 end

@@ -20,4 +20,15 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.delete
+      flash[:notice] = "User has been deleted."
+      redirect_to users_path
+    else
+      flash[:notice] = "You have a problem. User not deleted."
+      redirect_to users_path
+    end
+  end
 end
