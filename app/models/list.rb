@@ -12,7 +12,7 @@ class List < ActiveRecord::Base
 
   attr_accessible :occasion
 
-  # validates :occasion, :presence => { :message => 'Occasion cannot be blank!' }
-  # validate_uniqueness_of :ocassion
+  validates :occasion, :presence => :true
+  validates_uniqueness_of :occasion
 
 end
