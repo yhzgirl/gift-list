@@ -37,5 +37,4 @@ class ListsControllerTest < ActionController::TestCase
     delete :destroy, { :id => list.id }
     assert_equal 0, List.count
   end
-
 end

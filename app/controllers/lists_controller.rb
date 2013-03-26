@@ -19,7 +19,6 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    raise ActiveRecord::RecordNotFound if @list.nil?
   end
 
   def edit
