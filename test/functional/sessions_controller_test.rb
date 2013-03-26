@@ -19,4 +19,12 @@ class SessionsControllerTest < ActionController::TestCase
     post :create, { :email => 'notmy@email.com', :password => 'wrongpassword' }
     refute session[:user_id]
   end
+
+  test 'that a session can be ended/destroyed' do
+    user = UserFactory.user
+    post :create, { :email => user.email, :password => user.password }
+    assert_equal user.id, session[:user_id]
+    delete :destroy, { :id => session[:user_id] }
+    refute session[:user_id]
+  end
 end
