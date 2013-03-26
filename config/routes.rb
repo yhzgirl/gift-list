@@ -1,5 +1,7 @@
 GiftList::Application.routes.draw do
 
+  resources :sessions
+  
   resources :users
   resources :lists
 
