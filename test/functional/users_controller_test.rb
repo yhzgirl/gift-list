@@ -3,8 +3,15 @@ require 'factories/user_factory'
 
 class UsersControllerTest < ActionController::TestCase
 
+  test 'user is not logged in redirects to log in page' do
+    assert session[:user_id].nil?
+    get :edit, {:id => UserFactory.user}
+    assert_redirected_to new_session_path
+  end
+
   test 'can get user index' do
-    get :index
+    user = UserFactory.user
+    get :index, { :id => user.id }, {:user_id => user.id}
     assert_response :success
     assert_not_nil assigns(:users)
   end
@@ -29,25 +36,41 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal User.first.id, session[:user_id]
   end
 
-  test 'can delete user' do
+  test 'can delete user if logged in' do
     user = UserFactory.user
     assert_equal 1, User.count
-    delete :destroy, { :id => user.id }
+    delete :destroy, { :id => user.id }, {:user_id => user.id}
     assert_equal 0, User.count
   end
 
-  test 'a user can be edited' do
+  test 'cannot delete user unless logged in' do
     user = UserFactory.user
-    get :edit, { :id => user.id }
+    assert_equal 1, User.count
+    delete :destroy, { :id => user.id }
+    assert_redirected_to new_session_path
+    assert_equal 1, User.count
+  end
+
+  test 'can edit user if logged in' do
+    user = UserFactory.user
+    get :edit, { :id => user.id }, {:user_id => user.id}
     assert_response :success
     assert_equal user, assigns(:user)
   end
 
-  test 'a user can be updated' do
+  test 'can update a user if logged in' do
+    user = UserFactory.user
+    assert_equal "fake@email.com", user.email
+    put :update, { :user => { :email => "betterfake@email.com" }, :id => user.id }, {:user_id => user.id}
+    assert_equal user, assigns(:user)
+    assert_equal "betterfake@email.com", assigns(:user).email
+  end
+
+  test 'cannot update a user unless logged in' do
     user = UserFactory.user
     assert_equal "fake@email.com", user.email
     put :update, { :user => { :email => "betterfake@email.com" }, :id => user.id }
-    assert_equal user, assigns(:user)
-    assert_equal "betterfake@email.com", assigns(:user).email
+    assert_redirected_to new_session_path
+    assert_equal "fake@email.com", User.first.email
   end
 end

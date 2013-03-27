@@ -17,4 +17,8 @@ class UserFactory
     params[:password] ||= "password"
     User.create!(params)
   end
+
+  # def self.logged_in_user
+  #   User.create!
+  # end
 end
