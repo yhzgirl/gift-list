@@ -10,7 +10,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test 'can get user index' do
-    user = UserFactory.user
+    user = UserFactory.user 
     get :index, { :id => user.id }, {:user_id => user.id}
     assert_response :success
     assert_not_nil assigns(:users)
