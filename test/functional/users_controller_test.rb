@@ -83,5 +83,11 @@ class UsersControllerTest < ActionController::TestCase
     assert @controller.is_admin?
   end
 
-  
+  test 'if a user is not admin and is logged in' do
+    user = UserFactory.user
+    refute user.admin?
+    session[:user_id] = user.id # simulates logging in current user
+    assert @controller.send :current_user
+    refute @controller.is_admin?
+  end
 end
