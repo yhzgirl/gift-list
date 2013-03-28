@@ -25,6 +25,12 @@ class ListsControllerTest < ActionController::TestCase
     assert_equal "Birthday", List.first.occasion
   end
 
+  test 'a list of occasions cannot be created unless logged in' do
+    assert_equal 0, List.count
+    post :create, { :list => {:occasion => 'Birthday'} }
+    assert_equal 0, List.count
+  end
+
   test 'an occasion can be edited if logged in' do
     user = UserFactory.user
     list = ListFactory.list
@@ -56,4 +62,6 @@ class ListsControllerTest < ActionController::TestCase
     delete :destroy, { :id => list.id }, {:user_id => user.id}
     assert_equal 0, List.count
   end
+
+  
 end
