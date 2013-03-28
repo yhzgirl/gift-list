@@ -1,0 +1,39 @@
+footer {
+  max-width: 100%;
+  background-color: black;
+  float: right;
+  height: 3.125em;
+  margin-bottom: 0;
+  
+
+}
+
+footer ul {
+  text-align: center;
+  margin-top: 0.5px;
+  margin-bottom: -0.8px;
+  padding-left: 9%;
+}
+
+footer ul li{  
+  margin-right: 12%;
+  display: inline-block;
+  text-align: center;
+  line-height: 0;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+footer ul li a:hover{
+  color: red;
+}
+
+#copy {
+  font-size: 0.75em;
+  color: white;
+  float: right;
+  margin-right: 2%;
+}
