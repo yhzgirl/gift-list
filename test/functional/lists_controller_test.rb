@@ -63,5 +63,10 @@ class ListsControllerTest < ActionController::TestCase
     assert_equal 0, List.count
   end
 
-  
+  test 'cannot delete occasion unless logged in' do
+    list = ListFactory.list
+    assert_equal 1, List.count
+    delete :destroy, {:id => list.id }
+    assert_equal 1, List.count
+  end
 end
