@@ -9,8 +9,8 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to new_session_path
   end
 
-  test 'can get user index' do
-    user = UserFactory.user
+  test 'can get user index if admin' do
+    user = UserFactory.admin_user
     get :index, {}, {:user_id => user.id}
     assert_response :success
     assert_not_nil assigns(:users)
@@ -80,7 +80,7 @@ class UsersControllerTest < ActionController::TestCase
     assert user.admin?
     session[:user_id] = user.id # simulates logging in current user
     assert @controller.send :current_user
-    assert @controller.is_admin?
+    assert @controller.authorize
   end
 
   test 'if a user is not admin and is logged in' do
@@ -88,6 +88,6 @@ class UsersControllerTest < ActionController::TestCase
     refute user.admin?
     session[:user_id] = user.id # simulates logging in current user
     assert @controller.send :current_user
-    refute @controller.is_admin?
+    refute @controller.authorize
   end
 end

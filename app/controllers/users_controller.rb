@@ -2,8 +2,8 @@ class UsersController < ApplicationController
 
   
   before_filter :authenticate, :except => [:create, :new]
-  # before_filter :user_owner, :only => [:show, :edit, :update, :destroy]
-  # before_filter :is_admin?,  :only => [:index, :show]
+  before_filter :authorize, :except => [:create, :new]
+  
 
   def index
     @users = User.all
