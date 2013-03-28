@@ -18,7 +18,10 @@ class UserFactory
     User.create!(params)
   end
 
-  # def self.logged_in_user
-  #   User.create!
-  # end
+    def self.admin_user(params = {})
+    user = self.user(params)
+    user.admin = true
+    user.save!
+    user
+  end
 end

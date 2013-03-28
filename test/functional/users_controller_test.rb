@@ -10,7 +10,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test 'can get user index' do
-    user = UserFactory.user 
+    user = UserFactory.user
     get :index, {}, {:user_id => user.id}
     assert_response :success
     assert_not_nil assigns(:users)
@@ -24,22 +24,22 @@ class UsersControllerTest < ActionController::TestCase
 
   test 'can create new user' do
     assert_equal 0, User.count
-    post :create, {:user => {:email => "fake@email.com", 
-      :password => 'password', :password_confirmation => 'password'}}
+    post :create, {:user => {:email => "fake@email.com",
+                             :password => 'password', :password_confirmation => 'password'}}
     assert_equal 1, User.count
     assert_equal 'fake@email.com', User.first.email
   end
 
   test 'when user is created they are also logged in' do
-    post :create, {:user => {:email => "fake@email.com", 
-    :password => 'password', :password_confirmation => 'password'}}
+    post :create, {:user => {:email => "fake@email.com",
+                             :password => 'password', :password_confirmation => 'password'}}
     assert_equal User.first.id, session[:user_id]
   end
 
   test 'can delete user if logged in' do
     user = UserFactory.user
     assert_equal 1, User.count
-    delete :destroy, { :id => user.id }, {:user_id => user.id}
+    delete :destroy, { :id => user.id }, { :user_id => user.id }
     assert_equal 0, User.count
   end
 
@@ -53,7 +53,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test 'can edit user if logged in' do
     user = UserFactory.user
-    get :edit, { :id => user.id }, {:user_id => user.id}
+    get :edit, { :id => user.id }, { :user_id => user.id }
     assert_response :success
     assert_equal user, assigns(:user)
   end
@@ -61,7 +61,8 @@ class UsersControllerTest < ActionController::TestCase
   test 'can update a user if logged in' do
     user = UserFactory.user
     assert_equal "fake@email.com", user.email
-    put :update, { :user => { :email => "betterfake@email.com" }, :id => user.id }, {:user_id => user.id}
+    put :update, { :user => { :email => "betterfake@email.com" },
+                   :id => user.id }, { :user_id => user.id }
     assert_equal user, assigns(:user)
     assert_equal "betterfake@email.com", assigns(:user).email
   end
@@ -73,4 +74,14 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to new_session_path
     assert_equal "fake@email.com", User.first.email
   end
+
+  test 'if a user is admin and is logged in' do
+    user = UserFactory.admin_user
+    assert user.admin?
+    session[:user_id] = user.id # simulates logging in current user
+    assert @controller.send :current_user
+    assert @controller.is_admin?
+  end
+
+  
 end
