@@ -42,6 +42,13 @@ class ListsControllerTest < ActionController::TestCase
     assert_equal 'Graduation', assigns(:list).occasion
   end
 
+  test 'cannot update an occasion unless logged in' do
+    list = ListFactory.list
+    assert_equal "some occasion", list.occasion
+    put :update, {:list => {:occasion => "Christmas"}, :id => list.id}
+    assert_equal 'some occasion', list.occasion
+  end
+
   test 'an occasion can be deleted if logged in' do
     user = UserFactory.user
     list = ListFactory.list
