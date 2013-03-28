@@ -1,4 +1,6 @@
 class ListsController < ApplicationController
+  
+  before_filter :authorize
 
   def index
     @lists = List.all
