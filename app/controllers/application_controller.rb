@@ -3,14 +3,15 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  def require_admin
+    redirect_to root_path unless current_user.admin?
+  end
+
   def authorize
-    if current_user.admin?
-      true
-    elsif session[:user_id] == params[:id].to_i && params[:action] != 'index' #may need to change params[:id] later if conflits say with lists :)
-      true
-    else
-      redirect_to root_path, alert: "Not authorized!"
-    end
+    accessing_own_data = session[:user_id] == params[:id].to_i
+    return if current_user.admin?
+    return if accessing_own_data
+    redirect_to root_path, alert: "Not authorized!"
   end
 
   def authenticate

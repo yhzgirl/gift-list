@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   
   before_filter :authenticate, :except => [:create, :new]
   before_filter :authorize, :except => [:create, :new]
+  before_filter :require_admin, :only => [:index]
   
 
   def index
