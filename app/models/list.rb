@@ -10,6 +10,8 @@
 
 class List < ActiveRecord::Base
 
+  belongs_to :user
+
   attr_accessible :occasion
 
   validates :occasion, :presence => :true
