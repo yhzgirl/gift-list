@@ -14,5 +14,4 @@ class ListFactory
     params[:occasion] ||= "some occasion"
     List.create!(params)
   end
-
 end

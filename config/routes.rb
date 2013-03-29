@@ -1,8 +1,7 @@
 GiftList::Application.routes.draw do
 
- #  get 'signup' => 'users#new'
- #  get 'login' => 'sessions#new'
- #  delete 'logout' => 'sessions#destroy'
+  get 'signup' => 'users#new'
+  get 'login' => 'sessions#new'
 
   resources :sessions
   

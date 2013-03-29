@@ -2,7 +2,7 @@
 <p>Here they are!</p>
 
 <ul>
-
+ 
     <% @lists.each do |list| %>
      <li><%= link_to list.occasion, list_path(list) %> </li> 
         <%= link_to 'Edit', edit_list_path(list) %>

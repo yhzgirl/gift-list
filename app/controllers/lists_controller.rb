@@ -1,9 +1,10 @@
 class ListsController < ApplicationController
   
   before_filter :authenticate
+  before_filter :authorize, :except => [:new, :create, :index]
 
   def index
-    @lists = List.all
+    @lists = current_user.lists
   end
 
   def new
@@ -12,6 +13,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(params[:list])
+    @list.user = current_user
     if @list.save
       redirect_to @list
     else
