@@ -1,16 +1,27 @@
 <%= form_for @user do |f| %>
 
-  <%= f.label :name, "Name" %>:
-  <%= f.text_field :name %><br/>
 
+<div class="user-form grid_7">
+  <div class="user-row">
+    <%= f.label :name, "Name" %>:
+    <%= f.text_field :name %><br/>
+  </div>
+
+ <div class="user-row">
   <%= f.label :email, "Email" %>:
   <%= f.text_field :email %><br/>
+</div>
 
+ <div class="user-row">
   <%= f.label :password, "Password" %>:
   <%= f.password_field :password %><br/>
+</div>
 
+ <div class="user-row">
   <%= f.label :password_confirmation, "Password Confirmation" %>:
   <%= f.password_field :password_confirmation %><br/>
+</div>
 
   <%= f.submit %>
 <% end %>
+</div>
