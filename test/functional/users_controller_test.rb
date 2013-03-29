@@ -75,19 +75,19 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal "fake@email.com", User.first.email
   end
 
-  test 'if a user is admin and is logged in' do
+  test 'admin can access user index' do
     user = UserFactory.admin_user
     assert user.admin?
-    session[:user_id] = user.id # simulates logging in current user
-    assert @controller.send :current_user
-    assert @controller.authorize
+    session[:user_id] = user.id #simulates loggin in current user
+    get :index, {}, {:user_id => user.id}
+    assert_response :success
   end
 
-  test 'if a user is not admin and is logged in' do
+  test 'nonadmin users get redirected when trying to access index' do 
     user = UserFactory.user
     refute user.admin?
-    session[:user_id] = user.id # simulates logging in current user
-    assert @controller.send :current_user
-    refute @controller.authorize
+    session[:user_id] = user.id
+    get :index, {}, {:user_id => user.id}
+    assert_redirected_to root_path
   end
 end
