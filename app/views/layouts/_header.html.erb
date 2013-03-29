@@ -1,4 +1,30 @@
-<header>
+
+   <header class="clearfix">
+        <div class="grid_3">
+          <div id="gift-font">Gift List</div> 
+            <img id="ribbon" src="http://www.clker.com/cliparts/Z/X/r/e/b/d/black-bow-ribbon-md.png" alt="ribbon"/>
+        </div>
+
+        <div class="top-nav grid_9 omega">
+          <ul>
+            
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Home</a></li>
+          </ul>
+        </div>
+
+        <nav class="grid_9 omega">
+          <ul>
+            
+            <li><a href="#">Register for gift list</a>
+            <li><a href="#">Manage your list</a></li>
+            </li><li><a href="#">Buy a gift</a></li>
+            
+            
+          </ul>
+        </nav>
+      </header>
   <div>
     <% if current_user %>
       Logged in as <%= current_user.name %>.
@@ -8,4 +34,3 @@
       <%= link_to 'Log In', new_session_path %>
     <% end %>
   </div>
-</header>

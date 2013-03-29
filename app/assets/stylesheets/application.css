@@ -8,6 +8,52 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require 'normalize.css'
+ *= require 'grid.css'
  *= require_self
  *= require_tree .
  */
+
+
+body {
+  background-color: #e8e8e8;
+  margin-top: 4%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+.row {
+  margin-bottom: 5%;
+}
+.intro {
+  clear: both;
+}
+
+.intro-text {
+  
+}
+
+h1 {
+  font-size: 2em;
+  margin-top: 7.407%;
+}
+
+#top-pic {
+  margin-top: 8.1362%;
+  margin-left: 10.204%;
+}
+
+.register{
+/*  margin-left: 20px;
+*/}
+
+.thumbnails{
+  margin-top: 3.125%;
+  height: 11.25em;
+  width: 18.75em;
+}
+
+.bottom-images.grid_4 {
+  margin-right: 1.5625%;
+}
+
