@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   
   before_filter :authenticate
-  before_filter :authorize, :except => [:new, :create, :index]
+  # before_filter :authorize, :except => [:new, :create, :index]
 
   def index
     @lists = current_user.lists
@@ -12,8 +12,7 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = List.new(params[:list])
-    @list.user = current_user
+    @list = current_user.lists.build(params[:list])
     if @list.save
       redirect_to @list
     else
@@ -22,25 +21,25 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+    @list = current_user.lists.find(params[:id])
   end
 
   def edit
-    @list = List.find(params[:id])
+    @list = current_user.lists.find(params[:id])
   end
 
   def update
-    @list = List.find(params[:id])
+    @list = current_user.lists.find(params[:id])
     if @list.update_attributes(params[:list])
       flash[:notice] = "Your changes have been saved."
-      redirect_to list_path
+      redirect_to lists_path
     else
       render :edit
     end
   end
 
   def destroy
-    @list = List.find(params[:id])
+    @list = current_user.lists.find(params[:id])
     if @list.delete
       flash[:notice] = 'Your list has been deleted.'
       redirect_to lists_path

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     accessing_own_data = session[:user_id] == params[:id].to_i
     return if current_user.admin?
     return if accessing_own_data
-    redirect_to root_path, alert: "Not authorized!"
+    redirect_to root_path #removed alert due to list index filter being in the list controller
   end
 
   def authenticate
