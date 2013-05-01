@@ -1,2 +1,2 @@
-Makers Academy - Pairing with Alex 
+Makers Academy - Pairing with Alex -
 Learning authentication, authorization and contoller testing.
